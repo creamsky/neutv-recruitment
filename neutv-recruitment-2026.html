@@ -1,0 +1,992 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>东北大学电视台 2026 招新视觉物料</title>
+  <style>
+    @font-face {
+      font-family: "Smiley Sans";
+      src: url("./assets/fonts/SmileySans-Oblique.woff2") format("woff2");
+      font-style: oblique;
+      font-weight: 100 900;
+      font-display: block;
+    }
+    @font-face {
+      font-family: "Noto Sans SC Local";
+      src: url("./assets/fonts/NotoSansSC-VF.ttf") format("truetype");
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: block;
+    }
+    @font-face {
+      font-family: "Noto Serif SC Local";
+      src: url("./assets/fonts/NotoSerifSC-VF.ttf") format("truetype");
+      font-style: normal;
+      font-weight: 200 900;
+      font-display: block;
+    }
+
+    :root {
+      --ink: #08245e;
+      --ink-2: #173f91;
+      --blue: #0758ff;
+      --blue-deep: #0634ae;
+      --cyan: #3fd6ff;
+      --ice: #eefaff;
+      --paper: #f9fdff;
+      --orange: #ff8a32;
+      --white: #ffffff;
+      --muted: #55709f;
+      --line: rgba(255, 255, 255, .72);
+      --sans: "Noto Sans SC Local", "Microsoft YaHei", sans-serif;
+      --display: "Smiley Sans", "Noto Sans SC Local", sans-serif;
+      --serif: "Noto Serif SC Local", "Songti SC", serif;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: #dfe8f2; }
+    body { font-family: var(--sans); color: var(--ink); }
+    img { display: block; }
+    p, h1, h2, h3 { margin: 0; }
+    .nobr { white-space: nowrap; }
+
+    .design-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 72px;
+      padding: 64px;
+    }
+
+    .sheet {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      background:
+        radial-gradient(circle at 10% 8%, rgba(255,255,255,.98) 0 16%, rgba(232,249,255,.86) 36%, transparent 58%),
+        linear-gradient(145deg, #fbfeff 0%, #e9f8ff 44%, #f8fcff 100%);
+      box-shadow: 0 32px 100px rgba(5, 34, 92, .22);
+    }
+
+    .sheet::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -7;
+      background: url("./assets/generated/glass-background.png") center / cover no-repeat;
+      opacity: .56;
+      mix-blend-mode: multiply;
+      filter: saturate(1.08) brightness(1.14) contrast(.92);
+    }
+
+    .sheet::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 30;
+      pointer-events: none;
+      background:
+        linear-gradient(108deg, rgba(255,255,255,.24), transparent 16% 84%, rgba(255,255,255,.18)),
+        radial-gradient(circle at 88% 3%, rgba(255,255,255,.30), transparent 22%);
+      mix-blend-mode: screen;
+      opacity: .30;
+    }
+
+    .a4 { width: 1240px; height: 1754px; }
+    .rollup { width: 1200px; height: 3000px; }
+
+    .safe {
+      position: absolute;
+      inset: 0;
+      padding: 68px 72px;
+      z-index: 2;
+    }
+
+    .brandbar {
+      height: 108px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      position: relative;
+      z-index: 8;
+    }
+    .brandbar .neutv {
+      width: 338px;
+      height: 104px;
+      object-fit: contain;
+      object-position: left center;
+    }
+    .brandbar .rule {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(180deg, transparent, rgba(13,66,162,.55), transparent);
+    }
+    .brandbar .center-name {
+      font-size: 23px;
+      font-weight: 650;
+      letter-spacing: .14em;
+      color: rgba(8, 36, 94, .82);
+      white-space: nowrap;
+    }
+    .brandbar .school-mark {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+    .brandbar .emblem { width: 76px; height: 76px; object-fit: contain; }
+    .brandbar .school-en {
+      font-size: 12px;
+      font-weight: 720;
+      line-height: 1.5;
+      letter-spacing: .13em;
+      color: rgba(8, 36, 94, .58);
+      text-transform: uppercase;
+    }
+
+    .glass {
+      position: relative;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.24), rgba(218,247,255,.11) 48%, rgba(81,145,255,.07)),
+        rgba(255,255,255,.035);
+      border: 1px solid rgba(255,255,255,.46);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.60),
+        inset 0 -1px 0 rgba(42,111,218,.08),
+        0 18px 44px rgba(0,59,149,.095);
+      backdrop-filter: blur(12px) saturate(1.22) contrast(1.025);
+      -webkit-backdrop-filter: blur(12px) saturate(1.22) contrast(1.025);
+    }
+    .glass::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      height: auto;
+      border-radius: inherit;
+      background: none;
+      filter: none;
+      opacity: 1;
+      box-shadow: inset 1px 1px 0 rgba(255,255,255,.48), inset -1px -1px 0 rgba(50,113,217,.065);
+      pointer-events: none;
+    }
+    .glass::after {
+      display: none;
+    }
+
+    .glass-lens {
+      position: absolute;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 26% 18%, rgba(255,255,255,.32), transparent 25%),
+        linear-gradient(145deg, rgba(255,255,255,.13), rgba(79,195,255,.055) 44%, rgba(8,67,203,.075));
+      border: 1px solid rgba(255,255,255,.38);
+      box-shadow:
+        inset 10px 12px 28px rgba(255,255,255,.12),
+        inset -18px -22px 48px rgba(9,77,215,.085),
+        0 20px 56px rgba(8,53,151,.10);
+      backdrop-filter: blur(11px) saturate(1.24) contrast(1.02);
+      -webkit-backdrop-filter: blur(11px) saturate(1.24) contrast(1.02);
+      z-index: -2;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 13px;
+      color: var(--blue-deep);
+      font-size: 17px;
+      font-weight: 780;
+      letter-spacing: .19em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 5px;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--orange), #ffc066);
+      box-shadow: 0 4px 14px rgba(255,138,50,.28);
+    }
+
+    .tiny-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 10px 17px 11px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.54);
+      border: 1px solid rgba(255,255,255,.86);
+      box-shadow: 0 8px 24px rgba(10,69,165,.09), inset 0 1px 0 white;
+      font-size: 17px;
+      font-weight: 760;
+      color: var(--blue-deep);
+      letter-spacing: .10em;
+      backdrop-filter: blur(16px);
+    }
+    .tiny-tag .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--orange); }
+
+    /* A4 front and back share one exact brand scale. */
+    .a4 .safe { padding-top: 60px; }
+    .a4 .brandbar { height: 140px; gap: 18px; }
+    .a4 .brandbar .neutv { width: 350px; height: 140px; }
+    .a4 .brandbar .rule { height: 56px; }
+    .a4 .brandbar .school-mark { gap: 10px; }
+    .a4 .brandbar .school-en { font-size: 13px; line-height: 1.42; letter-spacing: .11em; }
+    .a4 .brandbar .emblem { width: 108px; height: 108px; }
+    .a4 .brandbar .center-name { font-size: 25px; font-weight: 680; letter-spacing: .055em; }
+
+    /* A4 front */
+    #a4-front { --front-panel-width: 820px; }
+    #a4-front .safe { padding-bottom: 62px; }
+    #a4-front .lens-one { width: 1030px; height: 510px; right: -370px; top: 164px; transform: rotate(-17deg); }
+    #a4-front .lens-two { width: 720px; height: 280px; left: -300px; bottom: 238px; transform: rotate(25deg); opacity: .78; }
+    #a4-front .hero-ribbon {
+      position: absolute;
+      z-index: -1;
+      width: 1040px;
+      right: -390px;
+      top: 250px;
+      transform: rotate(21deg);
+      opacity: .75;
+      filter: saturate(1.12) drop-shadow(0 30px 36px rgba(8,64,160,.11));
+    }
+    #a4-front .front-copy {
+      position: absolute;
+      left: 109px;
+      top: 245px;
+      width: 630px;
+      z-index: 7;
+    }
+    #a4-front .year-line {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      margin-bottom: 15px;
+    }
+    #a4-front .year {
+      font-family: var(--sans);
+      font-size: 47px;
+      font-weight: 880;
+      line-height: 1;
+      letter-spacing: .08em;
+      color: var(--blue);
+    }
+    #a4-front .year-line .dash { width: 100px; height: 4px; border-radius: 99px; background: linear-gradient(90deg, var(--orange), rgba(255,138,50,.08)); }
+    #a4-front .headline {
+      font-family: var(--display);
+      font-weight: 760;
+      font-style: normal;
+      font-size: 214px;
+      line-height: 1.03;
+      letter-spacing: -.012em;
+      color: var(--blue-deep);
+      filter: drop-shadow(0 9px 0 rgba(255,255,255,.48)) drop-shadow(0 24px 28px rgba(16,65,151,.12));
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 40px;
+    }
+    #a4-front .headline .station { display: block; }
+    #a4-front .headline .station .tight,
+    #rollup .hero-title h1 .station .tight { display: inline-block; transform: translateX(-9px); margin-right: -9px; }
+    #a4-front .headline .recruit {
+      display: block;
+      margin-left: 0;
+      background: linear-gradient(120deg, #05339d 4%, #0868ff 52%, #20bfee 92%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    #a4-front .slogan {
+      margin-top: 40px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-family: var(--serif);
+      font-size: 68px;
+      font-weight: 620;
+      letter-spacing: .10em;
+      color: #0a2a69;
+    }
+    #a4-front .slogan::after {
+      content: "";
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--orange);
+      box-shadow: 0 0 0 8px rgba(255,138,50,.10), 0 8px 24px rgba(255,138,50,.28);
+    }
+    #a4-front .hero-people {
+      position: absolute;
+      width: 610px;
+      height: 905px;
+      object-fit: contain;
+      object-position: center bottom;
+      right: -18px;
+      top: 512px;
+      z-index: 6;
+      filter: drop-shadow(0 34px 36px rgba(5,43,116,.17));
+    }
+    #a4-front .who {
+      position: absolute;
+      z-index: 9;
+      left: 72px;
+      top: 1030px;
+      bottom: auto;
+      width: var(--front-panel-width);
+      min-height: 302px;
+      padding: 31px 36px 30px;
+      border-radius: 38px;
+    }
+    #a4-front .who .label {
+      font-size: 16px;
+      font-weight: 840;
+      letter-spacing: .18em;
+      color: var(--blue);
+      margin-bottom: 10px;
+    }
+    #a4-front .who p {
+      font-size: 27px;
+      line-height: 1.52;
+      font-weight: 590;
+      max-width: 748px;
+    }
+    #a4-front .front-directions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 22px; }
+    #a4-front .front-directions span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 47px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.36);
+      border: 1px solid rgba(255,255,255,.62);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.74);
+      font-size: 16px;
+      font-weight: 760;
+      color: var(--blue-deep);
+    }
+    #a4-front .front-directions i { width: 7px; height: 7px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 0 5px rgba(255,138,50,.09); }
+    #a4-front .front-cta { margin-top: 16px; font-family: var(--serif); font-size: 18px !important; font-weight: 620 !important; color: var(--blue-deep); }
+    #a4-front .front-benefits {
+      position: absolute;
+      left: 72px;
+      top: 1374px;
+      width: var(--front-panel-width);
+      min-height: 142px;
+      z-index: 9;
+      border-radius: 38px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      padding: 22px 36px;
+    }
+    #a4-front .front-benefits .benefit { padding: 3px 20px; border-right: 1px solid rgba(255,255,255,.46); }
+    #a4-front .front-benefits .benefit:last-child { border-right: 0; }
+    #a4-front .front-benefits b { display: flex; align-items: center; gap: 8px; font-size: 20px; letter-spacing: .06em; color: var(--blue-deep); }
+    #a4-front .front-benefits b::before { content: ""; width: 7px; height: 7px; flex: 0 0 auto; border-radius: 50%; background: linear-gradient(135deg, var(--orange), #ffc36b); box-shadow: 0 0 0 5px rgba(255,138,50,.08); }
+    #a4-front .front-benefits p { margin-top: 8px; font-size: 16px; line-height: 1.50; font-weight: 560; color: rgba(8,36,94,.70); }
+    #a4-front .audience {
+      position: absolute;
+      left: 74px;
+      bottom: 70px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      color: rgba(8,36,94,.73);
+      font-size: 26px;
+      font-weight: 650;
+      letter-spacing: .035em;
+      z-index: 8;
+    }
+    #a4-front .audience .spark { color: var(--orange); font-size: 22px; }
+    #a4-front .turn {
+      position: absolute;
+      right: 72px;
+      bottom: 67px;
+      z-index: 8;
+      font-size: 22px;
+      line-height: 1.32;
+      font-weight: 780;
+      letter-spacing: .10em;
+      color: rgba(8,36,94,.70);
+      writing-mode: vertical-rl;
+    }
+
+    /* A4 back */
+    #a4-back::before { opacity: .47; transform: scaleX(-1); }
+    #a4-back .safe { padding-top: 60px; }
+    #a4-back .back-intro {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      margin-top: 10px;
+      margin-bottom: 15px;
+    }
+    #a4-back .back-intro .eyebrow { display: flex; line-height: 1; margin-bottom: 8px; font-size: 18px; }
+    #a4-back .back-intro h2 {
+      font-family: var(--display);
+      font-size: 76px;
+      line-height: 1.14;
+      font-weight: 760;
+      letter-spacing: -.025em;
+      color: var(--blue-deep);
+    }
+    #a4-back .back-intro p {
+      width: 515px;
+      font-size: 23px;
+      line-height: 1.48;
+      color: rgba(8,36,94,.70);
+      font-weight: 580;
+    }
+    .dept-grid {
+      display: grid;
+      grid-template-columns: 1.48fr 1fr;
+      grid-template-rows: 535px 535px;
+      gap: 22px;
+    }
+    .dept-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 38px;
+      z-index: 4;
+    }
+    .dept-card .number {
+      position: absolute;
+      right: 24px;
+      top: 15px;
+      font-family: var(--display);
+      font-size: 108px;
+      line-height: 1;
+      font-weight: 700;
+      color: rgba(255,255,255,.38);
+      filter: drop-shadow(0 2px 0 rgba(14,68,170,.07));
+    }
+    .dept-card .dept-kicker {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 16px;
+      font-weight: 840;
+      letter-spacing: .17em;
+      color: var(--blue);
+      text-transform: uppercase;
+    }
+    .dept-card .dept-kicker i { width: 9px; height: 9px; background: var(--orange); border-radius: 50%; box-shadow: 0 0 0 6px rgba(255,138,50,.10); }
+    .dept-card h3 {
+      margin-top: 9px;
+      font-family: var(--display);
+      font-size: 58px;
+      font-weight: 760;
+      letter-spacing: -.02em;
+      color: var(--blue-deep);
+    }
+    .dept-card .copy {
+      font-size: 17px;
+      line-height: 1.77;
+      font-weight: 520;
+      color: rgba(8,36,94,.82);
+      text-align: left;
+    }
+    .dept-card .keywords {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+    .dept-card .keywords span {
+      padding: 8px 12px 9px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.55);
+      border: 1px solid rgba(255,255,255,.89);
+      box-shadow: inset 0 1px 0 white, 0 5px 15px rgba(7,71,175,.08);
+      font-size: 15px;
+      font-weight: 720;
+      color: var(--ink-2);
+    }
+    .dept-card .close {
+      font-family: var(--serif);
+      font-size: 15px;
+      line-height: 1.55;
+      font-weight: 610;
+      color: var(--blue-deep);
+    }
+    .learn-block {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 14px 12px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.27);
+      border: 1px solid rgba(255,255,255,.48);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.60);
+      backdrop-filter: blur(10px) saturate(1.22);
+    }
+    .learn-block b {
+      flex: 0 0 auto;
+      color: var(--blue);
+      font-size: 13.5px;
+      line-height: 1.45;
+      letter-spacing: .08em;
+    }
+    .learn-block p {
+      color: rgba(8,36,94,.76);
+      font-size: 13.5px;
+      line-height: 1.45;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .workflow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      position: relative;
+      height: 48px;
+      align-items: start;
+    }
+    .workflow::before {
+      content: "";
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      top: 13px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(7,88,255,.12), rgba(7,88,255,.45), rgba(7,88,255,.12));
+    }
+    .workflow span {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 25px;
+      font-size: 13px;
+      font-weight: 720;
+      color: var(--ink-2);
+    }
+    .workflow span::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 7px;
+      transform: translateX(-50%);
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #fff, var(--cyan));
+      border: 2px solid rgba(7,88,255,.58);
+      box-shadow: 0 0 0 5px rgba(255,255,255,.34);
+    }
+    .dept-card .dept-art { position: absolute; object-fit: contain; filter: drop-shadow(0 20px 22px rgba(5,43,116,.13)); }
+
+    .video-card {
+      grid-column: 1 / -1;
+      padding: 35px 40px 32px;
+      background:
+        radial-gradient(circle at 87% 17%, rgba(79,211,255,.19), transparent 31%),
+        linear-gradient(135deg, rgba(255,255,255,.34), rgba(226,247,255,.17) 49%, rgba(68,126,244,.095));
+    }
+    .video-card .number,
+    .host-card .number { color: rgba(6,52,174,.36); filter: none; z-index: 2; }
+    .video-card .text { width: 620px; position: relative; z-index: 4; }
+    .video-card .copy { margin-top: 13px; font-size: 21px; line-height: 1.56; }
+    .video-card .keywords { margin-top: 13px; max-width: 600px; }
+    .video-card .learn-block { position: absolute; left: 40px; bottom: 70px; width: 610px; z-index: 5; }
+    .video-card .workflow { position: absolute; left: 40px; bottom: 12px; width: 590px; z-index: 5; }
+    .video-card .dept-art { width: 485px; height: 485px; right: 8px; bottom: -8px; object-position: right bottom; }
+    .video-card .props-art { position: absolute; right: -28px; top: -28px; width: 360px; opacity: .29; transform: rotate(7deg); }
+    .video-card .glass-sweep { position: absolute; width: 640px; height: 180px; right: -190px; bottom: 14px; transform: rotate(-18deg); }
+
+    .host-card { padding: 34px 30px; }
+    .host-card .copy { margin-top: 14px; width: 390px; font-size: 19.5px; line-height: 1.54; position: relative; z-index: 4; }
+    .host-card .growth-note { position:absolute; left:30px; top:304px; width:350px; z-index:5; font-family:var(--serif); font-size:17px; line-height:1.55; font-weight:610; color:var(--blue-deep); }
+    .host-card .keywords { position: absolute; left: 30px; bottom: 92px; width: 390px; z-index: 5; }
+    .host-card .learn-block { position: absolute; left: 30px; bottom: 25px; width: 405px; z-index: 6; }
+    .host-card .dept-art { width: 350px; height: 420px; right: -18px; bottom: -18px; object-position: right bottom; z-index: 3; }
+    .host-card .props-art { position: absolute; width: 250px; right: -28px; top: 10px; opacity: .26; z-index: 1; }
+
+    .editing-card {
+      padding: 31px 28px;
+      background:
+        linear-gradient(140deg, rgba(20,75,181,.84), rgba(10,50,137,.76) 58%, rgba(26,141,219,.64)),
+        rgba(8,50,144,.70);
+      border-color: rgba(255,255,255,.45);
+      color: white;
+    }
+    .editing-card .number { color: rgba(255,255,255,.16); }
+    .editing-card .dept-kicker { color: #bcecff; }
+    .editing-card h3 { color: white; }
+    .editing-card .copy { margin-top: 14px; color: rgba(255,255,255,.92); font-size: 19.5px; line-height: 1.53; position: relative; z-index: 5; }
+    .editing-card .keywords { position: absolute; bottom: 96px; left: 28px; z-index: 6; max-width: 228px; gap: 6px; }
+    .editing-card .keywords span { background: rgba(5,35,106,.68); border-color: rgba(133,220,255,.34); color: white; box-shadow: inset 0 1px 0 rgba(255,255,255,.17); }
+    .editing-card .learn-block { position: absolute; left: 28px; right: 28px; bottom: 24px; z-index: 7; background: rgba(5,35,106,.74); border-color: rgba(133,220,255,.32); }
+    .editing-card .learn-block b { color: #bcecff; }
+    .editing-card .learn-block p { color: rgba(255,255,255,.85); }
+    .editing-card .dept-art { width: 245px; height: 275px; right: -18px; top: auto; bottom: 54px; opacity: .72; z-index: 3; }
+    .editing-card .props-art { position: absolute; width: 390px; right: -145px; bottom: -52px; opacity: .26; z-index: 2; }
+
+    .qr-strip {
+      height: 212px;
+      margin-top: 22px;
+      border-radius: 36px;
+      padding: 22px 26px;
+      display: grid;
+      grid-template-columns: 1fr 278px 278px;
+      gap: 18px;
+      align-items: center;
+      overflow: hidden;
+    }
+    .qr-strip .qr-copy { padding-left: 8px; }
+    .qr-strip .qr-copy h3 { font-family: var(--display); font-size: 36px; color: var(--blue-deep); letter-spacing: -.01em; white-space: nowrap; }
+    .qr-strip .qr-copy p { margin-top: 8px; font-size: 18px; line-height: 1.50; color: rgba(8,36,94,.65); }
+    .qr-unit { display: grid; grid-template-columns: 156px 1fr; gap: 13px; align-items: center; }
+    .qr-box {
+      width: 156px;
+      height: 156px;
+      border-radius: 22px;
+      padding: 3px;
+      overflow: hidden;
+      background: #ffffff;
+      border: 1px solid rgba(255,255,255,.96);
+      display: grid;
+      place-items: center;
+      box-shadow: inset 0 0 0 1px rgba(7,88,255,.10), 0 12px 30px rgba(7,65,157,.12);
+    }
+    .qr-image { display: block; width: 100%; height: 100%; object-fit: contain; border-radius: 16px; }
+    .qr-unit .campus { align-self: center; margin: 0; font-size: 23px; font-weight: 760; line-height: 1.38; color: var(--blue-deep); }
+    .qr-unit .campus small { display: block; margin-top: 4px; font-size: 11px; font-weight: 650; letter-spacing: .09em; color: rgba(8,36,94,.47); text-transform: uppercase; }
+    .qr-unit .qq-number { display: block; margin-top: 7px; font-size: 14px; line-height: 1.30; font-weight: 780; letter-spacing: .005em; color: rgba(6,52,174,.88); white-space: nowrap; }
+    .qr-unit .qq-number b { display: block; font-size: 12px; font-weight: 720; color: rgba(8,36,94,.60); }
+    .qr-unit .qq-number em { display: block; margin-top: 1px; font-size: 14.5px; line-height: 1.18; font-style: normal; font-weight: 820; letter-spacing: .015em; }
+
+    /* Roll-up banner */
+    #rollup::before { opacity: .58; background-position: center top; }
+    #rollup .safe { padding: 84px 74px 76px; }
+    #rollup .brandbar { height: 160px; gap: 16px; }
+    #rollup .brandbar .neutv { width: 450px; height: 150px; }
+    #rollup .brandbar .school-mark { gap: 10px; }
+    #rollup .brandbar .school-en { font-size: 13px; line-height: 1.42; letter-spacing: .09em; }
+    #rollup .brandbar .emblem { width: 116px; height: 116px; }
+    #rollup .brandbar .center-name { font-size: 22px; font-weight: 680; letter-spacing: .04em; }
+    #rollup .hero-zone { position: relative; height: 840px; padding-top: 74px; z-index: 3; }
+    #rollup .hero-zone .lens-one { width: 850px; height: 360px; right: -260px; top: 20px; transform: rotate(-14deg); }
+    #rollup .hero-zone .lens-two { width: 700px; height: 230px; left: -340px; top: 430px; transform: rotate(22deg); }
+    #rollup .hero-zone .roll-ribbon { position: absolute; width: 920px; right: -330px; top: 82px; transform: rotate(18deg); opacity: .76; z-index: -1; }
+    #rollup .hero-title { position: relative; z-index: 5; }
+    #rollup .hero-title .row { display: flex; align-items: center; gap: 22px; }
+    #rollup .hero-title .year { font-size: 39px; font-weight: 860; letter-spacing: .10em; color: var(--blue); }
+    #rollup .hero-title h1 {
+      margin-top: 16px;
+      font-family: var(--display);
+      font-size: 168px;
+      line-height: 1.04;
+      font-style: normal;
+      font-weight: 760;
+      letter-spacing: -.012em;
+      color: var(--blue-deep);
+      filter: drop-shadow(0 10px 0 rgba(255,255,255,.46)) drop-shadow(0 25px 33px rgba(7,52,140,.14));
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 32px;
+    }
+    #rollup .hero-title h1 .station { display: block; }
+    #rollup .hero-title h1 .recruit { display: block; margin-left: 0; background: linear-gradient(120deg,#06399f,#0869ff 54%,#1cbfe9); background-clip:text; -webkit-background-clip:text; color:transparent; }
+    #rollup .hero-title .slogan { margin-top: 31px; font-family: var(--serif); font-size: 52px; letter-spacing: .11em; font-weight: 620; color: var(--ink); }
+    #rollup .hero-people { position: absolute; z-index: 4; width: 610px; height: 770px; object-fit: contain; object-position: right bottom; right: -32px; bottom: -34px; filter: drop-shadow(0 32px 38px rgba(4,40,112,.17)); }
+    #rollup .intro-pill { position: absolute; left: 0; bottom: 2px; z-index: 6; width: 660px; padding: 24px 29px 23px; border-radius: 32px; }
+    #rollup .intro-pill .intro-label { font-size: 14.5px; font-weight: 820; letter-spacing: .17em; color: var(--blue); margin-bottom: 8px; }
+    #rollup .intro-pill > p:not(.intro-label) { font-size: 21px; line-height: 1.50; font-weight: 580; }
+    #rollup .intro-directions { display: flex; gap: 8px; margin-top: 13px; }
+    #rollup .intro-directions span { padding: 7px 12px 8px; border-radius: 999px; background: rgba(255,255,255,.30); border: 1px solid rgba(255,255,255,.50); font-size: 13px; font-weight: 740; color: var(--blue-deep); }
+
+    #rollup .roll-qr {
+      position: relative;
+      height: 500px;
+      border-radius: 48px;
+      margin-top: 10px;
+      padding: 37px 44px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto 1fr;
+      column-gap: 36px;
+      z-index: 7;
+      overflow: hidden;
+    }
+    #rollup .roll-qr::before { content:""; position:absolute; width:520px; height:520px; border-radius:50%; right:-190px; top:-245px; background:radial-gradient(circle at 35% 35%,rgba(255,255,255,.78),rgba(29,160,255,.10) 55%,rgba(6,70,200,.18)); border:1px solid rgba(255,255,255,.7); box-shadow:inset -22px -22px 55px rgba(8,70,200,.13); }
+    #rollup .roll-qr .qr-heading { grid-column: 1 / -1; display:flex; align-items:end; justify-content:space-between; position:relative; z-index:2; }
+    #rollup .roll-qr .qr-heading h2 { font-family:var(--display); font-size:46px; color:var(--blue-deep); }
+    #rollup .roll-qr .qr-heading p { font-size:17px; color:rgba(8,36,94,.58); font-weight:620; }
+    #rollup .roll-qr .qr-unit { grid-template-columns: 250px 1fr; gap: 22px; margin-top: 24px; position:relative; z-index:2; }
+    #rollup .roll-qr .qr-box { width: 250px; height: 250px; border-radius: 34px; font-size: 16px; }
+    #rollup .roll-qr .campus { font-size: 32px; line-height: 1.32; }
+    #rollup .roll-qr .campus small { margin-top:8px; font-size:14px; }
+    #rollup .roll-qr .qq-number { margin-top: 12px; line-height: 1.28; }
+    #rollup .roll-qr .qq-number b { font-size: 17px; }
+    #rollup .roll-qr .qq-number em { margin-top: 3px; font-size: 21px; }
+
+    #rollup .roll-depts { margin-top: 34px; display: grid; grid-template-columns: 1.5fr 1fr; grid-template-rows: 500px 500px; gap: 24px; position: relative; z-index: 5; }
+    #rollup .roll-dept { position: relative; overflow: hidden; border-radius: 46px; padding: 40px 42px; }
+    #rollup .roll-dept .dept-kicker { font-size: 16px; font-weight:820; letter-spacing:.17em; color:var(--blue); }
+    #rollup .roll-dept h3 { margin-top:10px; font-family:var(--display); font-size:62px; color:var(--blue-deep); }
+    #rollup .roll-dept .copy { margin-top:17px; font-size:19px; line-height:1.62; color:rgba(8,36,94,.80); font-weight:520; text-align:left; }
+    #rollup .roll-dept .keywords { margin-top:17px; display:flex; flex-wrap:wrap; gap:8px; }
+    #rollup .roll-dept .keywords span { padding:7px 12px 8px; border-radius:99px; background:rgba(255,255,255,.57); border:1px solid rgba(255,255,255,.85); font-size:14px; font-weight:720; color:var(--ink-2); }
+    #rollup .roll-dept .dept-art { position:absolute; object-fit:contain; filter:drop-shadow(0 20px 24px rgba(4,45,125,.13)); }
+    #rollup .roll-dept .props-art { position:absolute; object-fit:contain; opacity:.25; }
+    #rollup .roll-video { grid-column:1/-1; padding-right:510px; }
+    #rollup .roll-video .copy { font-size:20.5px; line-height:1.58; }
+    #rollup .roll-video .learn-block b,
+    #rollup .roll-video .learn-block p,
+    #rollup .roll-host .learn-block b,
+    #rollup .roll-host .learn-block p { font-size:14px; line-height:1.45; }
+    #rollup .roll-video .workflow span { font-size:13px; }
+    #rollup .roll-video .learn-block { position:absolute; left:42px; bottom:72px; width:620px; z-index:5; }
+    #rollup .roll-video .workflow { position:absolute; left:42px; bottom:12px; width:610px; z-index:5; }
+    #rollup .roll-video .dept-art { width:475px; height:470px; right:0; bottom:-6px; object-position:right bottom; }
+    #rollup .roll-video .props-art { width:400px; right:-60px; top:-40px; transform:rotate(8deg); }
+    #rollup .roll-host .copy { width:390px; font-size:19px; line-height:1.62; position:relative; z-index:3; }
+    #rollup .roll-host .keywords { width:410px; position:relative; z-index:4; }
+    #rollup .roll-host .learn-block { position:relative; z-index:5; margin-top:15px; width:405px; }
+    #rollup .roll-host .dept-art { width:335px; height:410px; right:-12px; bottom:-20px; object-position:right bottom; z-index:2; }
+    #rollup .roll-host .props-art { width:260px; right:-25px; top:15px; }
+    #rollup .roll-host .host-accent-art { position:absolute; width:310px; height:auto; left:-4px; bottom:-28px; object-fit:contain; opacity:.29; z-index:1; filter:drop-shadow(0 15px 24px rgba(5,55,145,.10)); }
+    #rollup .roll-editing { background:linear-gradient(140deg,rgba(13,67,174,.84),rgba(8,43,126,.76) 60%,rgba(20,147,220,.64)); border-color:rgba(255,255,255,.34); }
+    #rollup .roll-editing .dept-kicker { color:#b8ecff; }
+    #rollup .roll-editing h3 { color:white; }
+    #rollup .roll-editing .copy { color:rgba(255,255,255,.90); font-size:18.5px; line-height:1.60; position:relative; z-index:4; }
+    #rollup .roll-editing .keywords { position:absolute; left:42px; bottom:92px; z-index:5; display:grid; grid-template-columns:repeat(2,100px); width:208px; max-width:none; gap:8px; }
+    #rollup .roll-editing .keywords span { width:100%; display:flex; align-items:center; justify-content:center; background:rgba(5,35,106,.68); border-color:rgba(133,220,255,.34); color:white; box-shadow:inset 0 1px 0 rgba(255,255,255,.16); }
+    #rollup .roll-editing .learn-block { position:absolute; left:42px; right:42px; bottom:24px; z-index:6; background:rgba(5,35,106,.74); border-color:rgba(133,220,255,.32); }
+    #rollup .roll-editing .learn-block b { color:#bcecff; }
+    #rollup .roll-editing .learn-block p { color:rgba(255,255,255,.86); }
+    #rollup .roll-editing .dept-art { width:270px; height:258px; right:-40px; bottom:48px; opacity:.68; }
+    #rollup .roll-editing .props-art { width:380px; right:-140px; top:-22px; opacity:.24; }
+    #rollup .roll-footer { margin-top: 34px; height: 166px; border-radius: 42px; display:flex; align-items:center; justify-content:space-between; padding:0 40px; position:relative; z-index:5; }
+    #rollup .roll-footer .audience-main { font-size:30px; font-weight:760; color:var(--blue-deep); }
+    #rollup .roll-footer .audience-main span { color:var(--orange); margin-right:10px; }
+    #rollup .roll-footer .slogan-small { font-family:var(--serif); font-size:26px; letter-spacing:.10em; color:rgba(8,36,94,.72); }
+
+    @media print {
+      html, body { background: white; }
+      .design-stage { padding: 0; gap: 0; }
+      .sheet { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="design-stage">
+    <section class="sheet a4" id="a4-front" aria-label="A4 招新宣传单正面">
+      <div class="glass-lens lens-one"></div>
+      <div class="glass-lens lens-two"></div>
+      <img class="hero-ribbon" src="./assets/generated/glass-ribbon.png" alt="">
+      <div class="safe">
+        <header class="brandbar">
+          <img class="neutv" src="./assets/brand/neutv-logo-transparent.png" alt="东北大学电视台 NEUTV">
+          <span class="rule"></span>
+          <span class="center-name">东北大学党委宣传部融媒体中心</span>
+          <span class="school-mark">
+            <span class="school-en">NORTHEASTERN<br>UNIVERSITY</span>
+            <img class="emblem" src="./assets/brand/neu-emblem.png" alt="东北大学校徽">
+          </span>
+        </header>
+
+        <div class="front-copy">
+          <div class="year-line">
+            <span class="year">2026</span>
+            <span class="dash"></span>
+            <span class="tiny-tag"><i class="dot"></i>NEW MEMBER CALL</span>
+          </div>
+          <h1 class="headline"><span class="station">电视<span class="tight">台</span></span><span class="recruit">招新啦</span></h1>
+          <p class="slogan">把爱留在电视台</p>
+        </div>
+
+        <img class="hero-people" src="./assets/generated/hero-media-trio.png" alt="视频创作、主持与剪辑团队插画">
+
+        <section class="who glass">
+          <p class="label">WHO WE ARE / 我们是谁</p>
+          <p>我们是东北大学党委宣传部融媒体中心电视台，用视频、主持与剪辑<span class="nobr">记录校园</span>。加入后，你可以参与<span class="nobr">官方短视频账号创作</span>、主持采访，或完成<span class="nobr">校园新闻后期制作</span>。</p>
+          <div class="front-directions">
+            <span><i></i>短视频创作</span>
+            <span><i></i>主持采访</span>
+            <span><i></i>新闻后期</span>
+          </div>
+          <p class="front-cta">选择你的方向，把校园故事做成作品。</p>
+        </section>
+
+        <section class="front-benefits glass" aria-label="加入电视台的体验">
+          <div class="benefit"><b>真实项目</b><p>走进官方视频与校园新闻的完整制作现场</p></div>
+          <div class="benefit"><b>团队创作</b><p>和伙伴把灵感从第一次讨论推进到成片</p></div>
+          <div class="benefit"><b>持续成长</b><p>在一次次拍摄、采访与剪辑中<span class="nobr">积累能力</span></p></div>
+        </section>
+
+        <p class="audience"><span class="spark">✦</span>面向全体在校生｜不限年级｜不限专业｜不限基础</p>
+        <p class="turn">翻面 · 找到你的表达方式 →</p>
+      </div>
+    </section>
+
+    <section class="sheet a4" id="a4-back" aria-label="A4 招新宣传单反面">
+      <div class="safe">
+        <header class="brandbar">
+          <img class="neutv" src="./assets/brand/neutv-logo-transparent.png" alt="东北大学电视台 NEUTV">
+          <span class="rule"></span>
+          <span class="center-name">东北大学党委宣传部融媒体中心</span>
+          <span class="school-mark">
+            <span class="school-en">NORTHEASTERN<br>UNIVERSITY</span>
+            <img class="emblem" src="./assets/brand/neu-emblem.png" alt="东北大学校徽">
+          </span>
+        </header>
+
+        <div class="back-intro">
+          <div>
+            <span class="eyebrow">Choose your role</span>
+            <h2>找到你的表达方式</h2>
+          </div>
+          <p>三种方向，同一种热爱。无需经验先行，<span class="nobr">从这里开始</span>，把兴趣做成作品。</p>
+        </div>
+
+        <div class="dept-grid">
+          <article class="dept-card video-card glass">
+            <span class="number">01</span>
+            <div class="text">
+              <p class="dept-kicker"><i></i>01 / VIDEO CREATION</p>
+              <h3>视频部</h3>
+              <p class="copy">视频部主要参与东北大学<span class="nobr">官方短视频账号</span><span class="nobr">（抖音、快手、B站、视频号）</span>的视频工作，包括选题策划、<span class="nobr">现场拍摄、</span>后期剪辑与内容出镜。你可以走进从选题到成片的创作流程，在实践中学习<span class="nobr">构图、运镜</span>、用光、收音与剪辑节奏，和伙伴一起完成作品。</p>
+              <div class="keywords"><span>视频选题</span><span>现场拍摄</span><span>后期剪辑</span><span>内容出镜</span></div>
+            </div>
+            <div class="learn-block"><b>你会学到</b><p>选题思路、构图运镜、用光收音、剪辑节奏与团队协作</p></div>
+            <div class="workflow" aria-label="视频创作流程"><span>灵感</span><span>选题</span><span>脚本</span><span>拍摄</span><span>成片</span></div>
+            <img class="props-art" src="./assets/generated/props-video.png" alt="">
+            <img class="dept-art" src="./assets/generated/dept-video.png" alt="视频部创作场景插画">
+            <div class="glass-lens glass-sweep"></div>
+          </article>
+
+          <article class="dept-card host-card glass">
+            <span class="number">02</span>
+            <p class="dept-kicker"><i></i>02 / HOST &amp; INTERVIEW</p>
+            <h3>主持部</h3>
+            <p class="copy">参与活动主持、人物采访、校园新闻录制<span class="nobr">及官方视频出镜</span>。在话筒与人群面前，练习<span class="nobr">清晰表达</span>、真诚沟通与临场应变，让东大的故事<span class="nobr">被听见、被记住</span>。</p>
+            <p class="growth-note">从第一次开口，到从容面对<span class="nobr">话筒、镜头与人群</span>。</p>
+            <div class="keywords"><span>活动主持</span><span>人物采访</span><span>新闻录制</span><span>视频出镜</span></div>
+            <div class="learn-block"><b>你会学到</b><p>表达组织、采访沟通、临场应变与镜头状态</p></div>
+            <img class="props-art" src="./assets/generated/props-broadcast.png" alt="">
+            <img class="dept-art" src="./assets/generated/dept-host-final.png" alt="女主持人手持话筒的插画">
+          </article>
+
+          <article class="dept-card editing-card glass">
+            <span class="number">03</span>
+            <p class="dept-kicker"><i></i>03 / NEWS EDITING</p>
+            <h3>剪辑部</h3>
+            <p class="copy">负责主持部录制的校园新闻后期制作，<span class="nobr">完成素材整理</span>、画面剪辑、字幕、声音与<span class="nobr">基础包装</span>，<span class="nobr">把现场记录</span>梳理成清晰、完整的<span class="nobr">新闻成片</span>。</p>
+            <div class="keywords"><span>素材整理</span><span>画面剪辑</span><span>字幕声音</span><span>新闻成片</span></div>
+            <div class="learn-block"><b>你会学到</b><p>新闻叙事、素材管理、字幕声音与成片规范</p></div>
+            <img class="props-art" src="./assets/generated/props-editing.png" alt="">
+            <img class="dept-art" src="./assets/generated/dept-editing-final.png" alt="校园新闻剪辑场景插画">
+          </article>
+        </div>
+
+        <section class="qr-strip glass">
+          <div class="qr-copy">
+            <h3>选择所在校区，扫码加入招新群</h3>
+            <p>选择所在校区，加入招新群，获取招新信息。</p>
+          </div>
+          <div class="qr-unit">
+            <div class="qr-box"><img class="qr-image" src="./assets/qr/nanhu-qq.png" alt="南湖校区招新QQ群二维码"></div>
+            <p class="campus">南湖校区<br>招新群<small>NANHU CAMPUS</small><span class="qq-number"><b>QQ群号：</b><em>1105594928</em></span></p>
+          </div>
+          <div class="qr-unit">
+            <div class="qr-box"><img class="qr-image" src="./assets/qr/hunnan-qq.png" alt="浑南校区招新QQ群二维码"></div>
+            <p class="campus">浑南校区<br>招新群<small>HUNNAN CAMPUS</small><span class="qq-number"><b>QQ群号：</b><em>1105610854</em></span></p>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="sheet rollup" id="rollup" aria-label="80乘200厘米招新易拉宝">
+      <div class="safe">
+        <header class="brandbar">
+          <img class="neutv" src="./assets/brand/neutv-logo-transparent.png" alt="东北大学电视台 NEUTV">
+          <span class="rule"></span>
+          <span class="center-name">东北大学党委宣传部融媒体中心</span>
+          <span class="school-mark">
+            <span class="school-en">NORTHEASTERN<br>UNIVERSITY</span>
+            <img class="emblem" src="./assets/brand/neu-emblem.png" alt="东北大学校徽">
+          </span>
+        </header>
+
+        <section class="hero-zone">
+          <div class="glass-lens lens-one"></div>
+          <div class="glass-lens lens-two"></div>
+          <img class="roll-ribbon" src="./assets/generated/glass-ribbon.png" alt="">
+          <div class="hero-title">
+            <div class="row"><span class="year">2026</span><span class="eyebrow">New member call</span></div>
+            <h1><span class="station">电视<span class="tight">台</span></span><span class="recruit">招新啦</span></h1>
+            <p class="slogan">把爱留在电视台</p>
+          </div>
+          <img class="hero-people" src="./assets/generated/hero-media-trio.png" alt="视频、主持与剪辑团队插画">
+          <div class="intro-pill glass">
+            <p class="intro-label">WHO WE ARE / 我们是谁</p>
+            <p>我们是东北大学党委宣传部融媒体中心电视台，用视频、主持与剪辑记录校园，在真实创作中把兴趣做成作品。</p>
+            <div class="intro-directions"><span>短视频创作</span><span>主持采访</span><span>新闻后期</span></div>
+          </div>
+        </section>
+
+        <section class="roll-qr glass">
+          <div class="qr-heading">
+            <h2>扫码加入招新群</h2>
+            <p>选择所在校区，和我们见面</p>
+          </div>
+          <div class="qr-unit">
+            <div class="qr-box"><img class="qr-image" src="./assets/qr/nanhu-qq.png" alt="南湖校区招新QQ群二维码"></div>
+            <p class="campus">南湖校区<br>招新群<small>NANHU CAMPUS</small><span class="qq-number"><b>QQ群号：</b><em>1105594928</em></span></p>
+          </div>
+          <div class="qr-unit">
+            <div class="qr-box"><img class="qr-image" src="./assets/qr/hunnan-qq.png" alt="浑南校区招新QQ群二维码"></div>
+            <p class="campus">浑南校区<br>招新群<small>HUNNAN CAMPUS</small><span class="qq-number"><b>QQ群号：</b><em>1105610854</em></span></p>
+          </div>
+        </section>
+
+        <section class="roll-depts">
+          <article class="roll-dept roll-video glass">
+            <p class="dept-kicker">01 · VIDEO CREATION</p>
+            <h3>视频部</h3>
+            <p class="copy">主要参与东北大学<span class="nobr">官方短视频账号</span><span class="nobr">（抖音、快手、B站、视频号）</span>的视频工作，包括选题、拍摄、剪辑与出镜，走进从灵感到成片的完整创作流程。</p>
+            <div class="keywords"><span>视频选题</span><span>现场拍摄</span><span>后期剪辑</span><span>内容出镜</span></div>
+            <div class="learn-block"><b>你会学到</b><p>选题思路、构图运镜、用光收音与剪辑节奏</p></div>
+            <div class="workflow" aria-label="视频创作流程"><span>灵感</span><span>选题</span><span>脚本</span><span>拍摄</span><span>成片</span></div>
+            <img class="props-art" src="./assets/generated/props-video.png" alt="">
+            <img class="dept-art" src="./assets/generated/dept-video.png" alt="视频部创作场景插画">
+          </article>
+
+          <article class="roll-dept roll-host glass">
+            <p class="dept-kicker">02 · HOST &amp; INTERVIEW</p>
+            <h3>主持部</h3>
+            <p class="copy">参与活动主持、人物采访、校园新闻录制及<span class="nobr">官方视频出镜</span>，在话筒与人群面前练习表达、沟通与临场应变。</p>
+            <div class="keywords"><span>活动主持</span><span>人物采访</span><span>新闻录制</span><span>视频出镜</span></div>
+            <div class="learn-block"><b>你会学到</b><p>表达组织、采访沟通、临场应变与镜头状态</p></div>
+            <img class="props-art" src="./assets/generated/props-broadcast.png" alt="">
+            <img class="host-accent-art" src="./assets/generated/props-host-accent.png" alt="">
+            <img class="dept-art" src="./assets/generated/dept-host-final.png" alt="女主持人手持话筒的插画">
+          </article>
+
+          <article class="roll-dept roll-editing glass">
+            <p class="dept-kicker">03 · NEWS EDITING</p>
+            <h3>剪辑部</h3>
+            <p class="copy">负责主持部录制的校园新闻后期制作，完成<span class="nobr">素材整理</span>、画面剪辑、字幕、声音与基础包装。</p>
+            <div class="keywords"><span>素材整理</span><span>画面剪辑</span><span>字幕声音</span><span>新闻成片</span></div>
+            <div class="learn-block"><b>你会学到</b><p>新闻叙事、素材管理、字幕声音与成片规范</p></div>
+            <img class="props-art" src="./assets/generated/props-editing.png" alt="">
+            <img class="dept-art" src="./assets/generated/dept-editing-final.png" alt="校园新闻剪辑场景插画">
+          </article>
+        </section>
+
+        <footer class="roll-footer glass">
+          <p class="audience-main"><span>✦</span>面向全体在校生｜不限年级｜不限专业｜不限基础</p>
+          <p class="slogan-small">把爱留在电视台</p>
+        </footer>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

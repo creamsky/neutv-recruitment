@@ -1,0 +1,13 @@
+node_modules/
+tmp/
+output/png/
+output/pdf/
+output/preview/
+output/rollup-600dpi-strips/
+*.log
+.DS_Store
+Thumbs.db
+
+# 最终交付物建议通过 GitHub Release 发布，不在日常提交中反复更新。
+output/*_最终版/
+output/*_最终版.zip

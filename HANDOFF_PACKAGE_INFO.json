@@ -1,0 +1,12 @@
+{
+  "name": "neutv-recruitment-kit",
+  "version": "1.0.0",
+  "currentYear": 2026,
+  "generatedAt": "2026-08-17T09:06:47.901Z",
+  "sourceDesign": "neutv-recruitment-2026.html",
+  "finalDeliveryFormat": "PNG only",
+  "outputs": {
+    "a4Dpi": 300,
+    "rollupDpi": 200
+  }
+}

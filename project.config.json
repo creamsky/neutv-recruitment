@@ -1,0 +1,19 @@
+{
+  "projectName": "东北大学电视台招新物料",
+  "currentYear": 2026,
+  "designFile": "neutv-recruitment-2026.html",
+  "copyFile": "东北大学电视台招新宣传单文字稿.md",
+  "institution": "东北大学党委宣传部融媒体中心",
+  "brand": "东北大学电视台 NEUTV",
+  "slogan": "把爱留在电视台",
+  "groups": {
+    "nanhu": "1105594928",
+    "hunnan": "1105610854"
+  },
+  "output": {
+    "a4Dpi": 300,
+    "rollupDpi": 200,
+    "rollupWidthMm": 800,
+    "rollupHeightMm": 2000
+  }
+}

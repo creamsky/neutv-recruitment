@@ -1,0 +1,25 @@
+{
+  "name": "neutv-recruitment-kit",
+  "version": "1.0.0",
+  "private": true,
+  "description": "NEUTV 招新宣传单与易拉宝的可复用 HTML/CSS 渲染工程",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "render": "node scripts/render_design.cjs",
+    "render:rollup": "node scripts/render_design.cjs --rollup-only",
+    "qa": "node scripts/qa_design.cjs",
+    "export:pdf": "node scripts/export_vector_pdf.cjs",
+    "extract:qr:2026": "node scripts/extract_qq_qr.cjs",
+    "annual:update": "node scripts/annual_update.cjs",
+    "release": "npm run render && npm run qa && node scripts/prepare_release.cjs",
+    "handoff:build": "node scripts/build_handoff_package.cjs"
+  },
+  "dependencies": {
+    "pdf-lib": "1.17.1",
+    "playwright": "1.62.1",
+    "sharp": "0.35.3"
+  }
+}
