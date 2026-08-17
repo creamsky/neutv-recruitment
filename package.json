@@ -1,9 +1,9 @@
 {
   "name": "neutv-recruitment-kit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "NEUTV 招新宣传单与易拉宝的可复用 HTML/CSS 渲染工程",
-  "license": "MIT",
+  "license": "UNLICENSED",
   "engines": {
     "node": ">=20"
   },

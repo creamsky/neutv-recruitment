@@ -1,25 +1,63 @@
-MIT License
+NEUTV 招新物料限制性使用声明 1.0
 
-Copyright (c) 2026 NEUTV contributors
+Copyright (c) 2026 本项目贡献者及相关权利人。保留所有权利。
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated source-code documentation files (the
-"Software"), to deal in the Software without restriction, including without
-limitation the rights to use, copy, modify, merge, publish, distribute,
-sublicense, and/or sell copies of the Software, and to permit persons to whom
-the Software is furnished to do so, subject to the following conditions:
+一、性质
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+本仓库公开仅用于查看、学习、存档、协作审阅，以及经授权的校内延续制作。
+除本声明明确写明的情形外，不授予任何人复制、修改、发行、再许可、销售、
+商业使用、制作衍生作品或将仓库内容用于其他组织宣传的权利。本项目不是采用
+OSI 开源许可证发布的自由软件项目。
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+GitHub 平台根据其服务条款允许的查看和 fork，不代表获得脱离平台使用仓库内容
+的额外授权。
 
-This license covers the project-authored source code and documentation only.
-Brand marks, school emblems, QR codes, fonts, reference documents and image
-assets are governed by their own notices in ASSET_LICENSES.md.
+二、有限的内部维护许可
+
+仅在已经获得东北大学党委宣传部融媒体中心及其他相关权利人授权的前提下，
+东北大学校内维护人员可以为 NEUTV 非商业招新工作复制和修改项目原创代码、
+版式与文档。使用者必须：
+
+1. 保留本声明、素材授权说明和品牌使用政策；
+2. 在发布前重新确认官方标识、文案、二维码及个人信息；
+3. 不得将上述内部维护许可转授第三方；
+4. 不得暗示未经确认的学校、部门或权利人背书。
+
+三、官方品牌素材不授予许可
+
+NEUTV 标识、东北大学名称与校徽，以及其他官方名称、图形、徽标和识别元素，
+属于相应权利人。本仓库维护者不代表相关权利人授予任何商标、标识或品牌使用权。
+未经相应权利人事先书面授权，不得：
+
+1. 提取、复制、修改、重绘、变色、组合、再发布或单独分发官方标识；
+2. 用于校外组织、商业项目、商品、广告、社交账号头像或其他宣传；
+3. 用于注册商标、域名、账号名称，或制造官方关联、认证、赞助或背书的印象；
+4. 将官方标识或含官方标识的文件用于模型训练、素材库或模板库。
+
+重点受限路径包括但不限于：
+
+- assets/brand/
+- references/2026-input/标识/
+- references/2026-input/NEUTV_logo.jpg
+
+四、二维码、参考资料与视觉素材
+
+招新群二维码和群号仅限对应年度、对应校区的经授权招新用途，不得抓取、转载、
+转售或用于引流。references/ 下的资料仅用于内部追溯，不授予独立再发布权。
+assets/generated/、成品 PNG、HTML 视觉编排及其他项目视觉素材不得被拆分销售、
+再包装为模板、用于其他机构品牌宣传或用于模型训练，除非另有书面许可。
+
+五、第三方材料
+
+第三方字体及其他明确标注为第三方许可的材料继续适用各自许可证，本声明不扩大、
+缩小或替代这些第三方权利。详见 ASSET_LICENSES.md。
+
+六、法定例外与无担保
+
+本声明不限制适用法律强制规定的合理使用或其他法定例外。仓库内容按“现状”提供，
+不提供任何明示或默示担保。使用者应自行确认其使用获得了必要授权。
+
+七、历史版本
+
+本声明适用于采用本声明发布的版本，不试图追溯撤销旧版本中已经依法授予且不可撤销
+的权利。需要超出本声明范围使用任何内容时，请联系相应权利人取得书面许可。

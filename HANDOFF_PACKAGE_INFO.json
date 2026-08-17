@@ -1,10 +1,11 @@
 {
   "name": "neutv-recruitment-kit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "currentYear": 2026,
   "generatedAt": "2026-08-17T09:06:47.901Z",
   "sourceDesign": "neutv-recruitment-2026.html",
   "finalDeliveryFormat": "PNG only",
+  "license": "NEUTV Restricted Use Notice 1.0",
   "outputs": {
     "a4Dpi": 300,
     "rollupDpi": 200

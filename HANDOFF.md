@@ -51,7 +51,7 @@
 - QR 码不能使用 ImageGen、生成式超分辨率或重新绘制；只能使用真实码图，进行尺寸调整和无损背景清理。
 - `scripts/extract_qq_qr.cjs` 的裁切坐标只适用于 2026 两张原始 QQ 截图，不是通用二维码提取器。
 - `tmp/` 是可删除工作区，不应提交或交接。
-- 公开仓库不应把官方标识和二维码误标成 MIT 素材，详见 `ASSET_LICENSES.md`。
+- 本仓库采用限制性使用声明，不是开放许可证；官方标识不授予任何使用权，详见 `LICENSE`、`BRAND_POLICY.md` 和 `ASSET_LICENSES.md`。
 
 ## 接手后的第一件事
 
