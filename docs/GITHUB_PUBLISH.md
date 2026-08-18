@@ -22,7 +22,7 @@
 ```bash
 git init
 git add .
-git commit -m "开源 NEUTV 2026 招新物料可复用工程"
+git commit -m "发布 NEUTV 2026 招新物料公开源码工程"
 gh repo create neutv-recruitment-kit \
   --public \
   --description "东北大学电视台 NEUTV 招新宣传单与易拉宝的可复用 HTML/CSS 设计、渲染与年度交接工程。" \
@@ -51,5 +51,5 @@ NEUTV 招新物料可复用工程首个公开版本。
 - 跨平台 Chromium 渲染
 - 自动 QA、年度更新和交接文档
 
-品牌标识、校徽、二维码和参考素材不自动纳入 MIT License，请阅读 ASSET_LICENSES.md。
+本仓库采用限制性使用声明，不是开放许可证。品牌标识、校徽和二维码不授予通用使用权，请阅读 LICENSE、BRAND_POLICY.md 和 ASSET_LICENSES.md。
 ```

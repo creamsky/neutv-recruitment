@@ -5,7 +5,7 @@ const { ROOT, CONFIG, YEAR } = require('./project_config.cjs');
 const projectPackage = require('../package.json');
 
 const outputRoot = path.join(ROOT, 'output');
-const packageName = `NEUTV招新物料_开源交接包_v${projectPackage.version}_${YEAR}`;
+const packageName = `NEUTV招新物料_公开源码交接包_v${projectPackage.version}_${YEAR}`;
 const stagingRoot = path.join(outputRoot, packageName);
 
 const rootFiles = [
@@ -13,6 +13,7 @@ const rootFiles = [
   '.gitignore',
   'AGENTS.md',
   'ASSET_LICENSES.md',
+  'BRAND_POLICY.md',
   'CHANGELOG.md',
   'CONTRIBUTING.md',
   'HANDOFF.md',
@@ -79,6 +80,7 @@ const packageInfo = {
   generatedAt: new Date().toISOString(),
   sourceDesign: CONFIG.designFile,
   finalDeliveryFormat: 'PNG only',
+  license: 'NEUTV Restricted Use Notice 1.0',
   outputs: {
     a4Dpi: CONFIG.output.a4Dpi,
     rollupDpi: CONFIG.output.rollupDpi,

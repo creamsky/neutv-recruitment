@@ -364,7 +364,7 @@ async function addPngPage(pdf, pngPath, widthPt, heightPt) {
 async function writePdfs(frontPath, backPath, rollupPath) {
   const a4 = await PDFDocument.create();
   a4.setTitle(`东北大学电视台 ${YEAR} 招新宣传单`);
-  a4.setAuthor('东北大学党委宣传部融媒体中心 · 东北大学电视台');
+  a4.setAuthor('东北大学融媒体中心 · 东北大学电视台');
   a4.setSubject('A4 双面招新宣传单');
   await addPngPage(a4, frontPath, 595.2755906, 841.8897638);
   await addPngPage(a4, backPath, 595.2755906, 841.8897638);
@@ -373,7 +373,7 @@ async function writePdfs(frontPath, backPath, rollupPath) {
 
   const rollup = await PDFDocument.create();
   rollup.setTitle(`东北大学电视台 ${YEAR} 招新易拉宝`);
-  rollup.setAuthor('东北大学党委宣传部融媒体中心 · 东北大学电视台');
+  rollup.setAuthor('东北大学融媒体中心 · 东北大学电视台');
   rollup.setSubject('80 × 200 cm 招新易拉宝');
   await addPngPage(rollup, rollupPath, 2267.7165354, 5669.2913386);
   const rollupPdfPath = path.join(OUTPUT_PDF, outputName('rollup-80x200cm.pdf'));
