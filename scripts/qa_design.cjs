@@ -153,7 +153,7 @@ async function auditDom() {
       }
 
       const centerNames = [...document.querySelectorAll('.center-name')];
-      if (centerNames.length !== 3 || centerNames.some(node => node.textContent.trim() !== '东北大学党委宣传部融媒体中心')) issues.push('institution name is not updated consistently across all three designs');
+      if (centerNames.length !== 3 || centerNames.some(node => node.textContent.trim() !== '东北大学融媒体中心')) issues.push('institution name is not updated consistently across all three designs');
       const frontHeadlineSize = parseFloat(getComputedStyle(document.querySelector('#a4-front .headline')).fontSize);
       if (frontHeadlineSize < 200) issues.push(`A4 front headline is not enlarged enough: ${frontHeadlineSize}px`);
 
@@ -203,7 +203,7 @@ async function main() {
   assert(fs.existsSync(HTML), `Missing HTML: ${HTML}`);
   const html = fs.readFileSync(HTML, 'utf8');
   const required = [
-    '东北大学党委宣传部融媒体中心', '电视台', '招新啦', '把爱留在电视台',
+    '东北大学融媒体中心', '电视台', '招新啦', '把爱留在电视台',
     '面向全体在校生', '南湖校区', '浑南校区',
     CONFIG.groups.nanhu, CONFIG.groups.hunnan,
     '视频部', '主持部', '剪辑部',
