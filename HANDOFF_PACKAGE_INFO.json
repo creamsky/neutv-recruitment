@@ -8,6 +8,8 @@
   "license": "NEUTV Restricted Use Notice 1.0",
   "outputs": {
     "a4Dpi": 300,
-    "rollupDpi": 200
+    "rollupDpi": 200,
+    "fanSizePx": 3600,
+    "fanDpi": 300
   }
 }

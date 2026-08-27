@@ -271,7 +271,7 @@ function addExactPage(pdf, embeddedPage, widthMm, heightMm) {
 
 function applyMetadata(pdf, { title, subject }) {
   pdf.setTitle(title);
-  pdf.setAuthor('东北大学融媒体中心 · 东北大学电视台');
+    pdf.setAuthor('东北大学融媒体中心 · 东北大学电视台');
   pdf.setSubject(subject);
   pdf.setCreator(`NEUTV ${YEAR} HTML print pipeline`);
   pdf.setProducer('Google Chrome + pdf-lib (vector-preserving page normalization)');

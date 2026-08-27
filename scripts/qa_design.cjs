@@ -36,6 +36,23 @@ async function checkRaster(relativePath, expected) {
     assert(alpha.min === 0, `${relativePath}: alpha min ${alpha.min}, expected 0`);
     assert(alpha.max > 200, `${relativePath}: alpha max ${alpha.max}, expected > 200`);
   }
+  if (expected.circularAlpha) {
+    const { data, info } = await sharp(file).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+    const centerX = (info.width - 1) / 2;
+    const centerY = (info.height - 1) / 2;
+    const radius = Math.min(info.width, info.height) / 2 + 2;
+    const radiusSquared = radius * radius;
+    let outsideMaxAlpha = 0;
+    for (let y = 0; y < info.height; y += 1) {
+      const dy = y - centerY;
+      for (let x = 0; x < info.width; x += 1) {
+        const dx = x - centerX;
+        if (dx * dx + dy * dy <= radiusSquared) continue;
+        outsideMaxAlpha = Math.max(outsideMaxAlpha, data[(y * info.width + x) * 4 + 3]);
+      }
+    }
+    assert(outsideMaxAlpha === 0, `${relativePath}: circular mask leaks alpha ${outsideMaxAlpha} outside the disc`);
+  }
   return `${relativePath} ${metadata.width}x${metadata.height} ${metadata.channels}ch ${metadata.density || '-'}dpi`;
 }
 
@@ -72,7 +89,7 @@ async function auditDom() {
 
     const result = await page.evaluate(({ nanhuGroup, hunnanGroup }) => {
       const issues = [];
-      const selectors = ['#a4-front', '#a4-back', '#rollup'];
+      const selectors = ['#a4-front', '#a4-back', '#rollup', '#fan-front', '#fan-back'];
       const textSelector = 'h1,h2,h3,p,.center-name,.school-en,.tiny-tag,.qr-box,.keywords span';
       for (const selector of selectors) {
         const sheet = document.querySelector(selector);
@@ -88,7 +105,7 @@ async function auditDom() {
         }
       }
 
-      for (const selector of ['.brandbar', '.who', '.back-intro', '.qr-strip', '.intro-pill', '.roll-qr', '.roll-footer']) {
+      for (const selector of ['.brandbar', '.who', '.back-intro', '.qr-strip', '.intro-pill', '.roll-qr', '.roll-footer', '.fan-brand-card', '.fan-back-brand', '.fan-qr-box']) {
         for (const element of document.querySelectorAll(selector)) {
           if (element.scrollWidth > element.clientWidth + 2 || element.scrollHeight > element.clientHeight + 2) {
             issues.push(`${selector}: content overflow ${element.scrollWidth}x${element.scrollHeight} > ${element.clientWidth}x${element.clientHeight}`);
@@ -105,7 +122,7 @@ async function auditDom() {
       if (document.querySelectorAll('#rollup .roll-host .host-accent-art').length !== 1) issues.push('roll-up host region is not using the transparent lower accent exactly once');
 
       const qrBoxes = document.querySelectorAll('.qr-box');
-      if (qrBoxes.length !== 4) issues.push(`QR placement count ${qrBoxes.length}, expected 4`);
+      if (qrBoxes.length !== 5) issues.push(`QR placement count ${qrBoxes.length}, expected 5`);
       for (const qrBox of qrBoxes) {
         const image = qrBox.querySelector('img.qr-image');
         if (!image || !image.complete || image.naturalWidth < 900 || image.naturalHeight < 900) {
@@ -116,11 +133,75 @@ async function auditDom() {
         }
       }
       const visibleText = document.body.innerText;
-      if (visibleText.split(nanhuGroup).length - 1 !== 2) issues.push('南湖校区 QQ群号 is not shown exactly twice');
+      if (visibleText.split(nanhuGroup).length - 1 !== 3) issues.push('南湖校区 QQ群号 is not shown exactly three times');
       if (visibleText.split(hunnanGroup).length - 1 !== 2) issues.push('浑南校区 QQ群号 is not shown exactly twice');
       const qrSources = [...document.querySelectorAll('img.qr-image')].map(image => image.getAttribute('src'));
-      if (qrSources.filter(source => source.includes('nanhu-qq.png')).length !== 2) issues.push('南湖校区 QR source is not used exactly twice');
+      if (qrSources.filter(source => source.includes('nanhu-qq.png')).length !== 3) issues.push('南湖校区 QR source is not used exactly three times');
       if (qrSources.filter(source => source.includes('hunnan-qq.png')).length !== 2) issues.push('浑南校区 QR source is not used exactly twice');
+      if (document.querySelectorAll('#fan-front .emblem,#fan-back .emblem').length !== 0) issues.push('round fan must not contain the university emblem');
+      if (document.querySelectorAll('#fan-front .fan-logo,#fan-back .fan-logo').length !== 2) issues.push('round fan must use the official NEUTV logo on both sides');
+      if (!document.querySelector('#fan-front .fan-identity')?.innerText.includes('东北大学融媒体中心')) issues.push('round fan front does not identify the institution');
+      for (const [fanSelector, contentSelector] of [
+        ['#fan-front', '.fan-year-chip,.fan-brand-card,.fan-identity,.fan-main-title,.fan-slogan,.fan-side-note'],
+        ['#fan-back', '.fan-back-brand,.fan-back-heading,.fan-group-number,.fan-qr-box,.fan-side-note'],
+      ]) {
+        const fan = document.querySelector(fanSelector);
+        const fanRect = fan.getBoundingClientRect();
+        const keepout = {
+          left: fanRect.left + fanRect.width / 3,
+          right: fanRect.left + fanRect.width * 2 / 3,
+          top: fanRect.top + fanRect.height * 2 / 3,
+          bottom: fanRect.bottom,
+        };
+        for (const element of fan.querySelectorAll(contentSelector)) {
+          const rect = element.getBoundingClientRect();
+          const overlapsKeepout = rect.right > keepout.left + 2
+            && rect.left < keepout.right - 2
+            && rect.bottom > keepout.top + 2
+            && rect.top < keepout.bottom - 2;
+          if (overlapsKeepout) issues.push(`${fanSelector}: readable content enters central handle area: ${element.className}`);
+        }
+      }
+      const unframedFanElements = document.querySelectorAll('.fan-year-chip,.fan-brand-card,.fan-back-brand');
+      for (const element of unframedFanElements) {
+        const style = getComputedStyle(element);
+        const hasBorder = parseFloat(style.borderTopWidth) > 0
+          || parseFloat(style.borderRightWidth) > 0
+          || parseFloat(style.borderBottomWidth) > 0
+          || parseFloat(style.borderLeftWidth) > 0;
+        if (hasBorder || style.boxShadow !== 'none' || style.backgroundImage !== 'none' || style.backgroundColor !== 'rgba(0, 0, 0, 0)') {
+          issues.push(`round fan direct-layout element still has a frame: ${element.className}`);
+        }
+      }
+      const fanQrStyle = getComputedStyle(document.querySelector('.fan-qr-box'));
+      if (parseFloat(fanQrStyle.borderTopWidth) > 0 || fanQrStyle.boxShadow !== 'none' || parseFloat(fanQrStyle.borderTopLeftRadius) > 0) {
+        issues.push('round fan QR quiet zone still has decorative framing');
+      }
+      if (document.querySelectorAll('.fan-side-note').length !== 0) issues.push('round fan still contains framed lower-side note pills');
+
+      const fanTitleParts = [...document.querySelectorAll('#fan-front .fan-main-title span')].map(element => element.getBoundingClientRect());
+      if (fanTitleParts.length !== 2) {
+        issues.push('round fan headline must contain two inline color groups');
+      } else {
+        if (Math.abs(fanTitleParts[0].top - fanTitleParts[1].top) > 2) issues.push('round fan six-character headline is not on one line');
+        if (fanTitleParts[1].left - fanTitleParts[0].right < 14) issues.push('round fan six-character headline phrase gap is too tight');
+      }
+
+      for (const fanSelector of ['#fan-front', '#fan-back']) {
+        const fan = document.querySelector(fanSelector);
+        const fanRect = fan.getBoundingClientRect();
+        const centerX = fanRect.left + fanRect.width / 2;
+        const centerY = fanRect.top + fanRect.height / 2;
+        const safeRadius = fanRect.width / 2 - 34;
+        const readable = fan.querySelectorAll('h1,h2,p,.fan-brand-card,.fan-back-brand,.fan-qr-box');
+        for (const element of readable) {
+          const rect = element.getBoundingClientRect();
+          const corners = [[rect.left, rect.top], [rect.right, rect.top], [rect.left, rect.bottom], [rect.right, rect.bottom]];
+          if (corners.some(([x, y]) => Math.hypot(x - centerX, y - centerY) > safeRadius)) {
+            issues.push(`${fanSelector}: readable element exceeds circular safe edge: ${element.className}`);
+          }
+        }
+      }
       for (const forbiddenPercentage of ['50%', '30%', '20%']) {
         if (visibleText.includes(forbiddenPercentage)) issues.push(`public-facing percentage remains: ${forbiddenPercentage}`);
       }
@@ -153,7 +234,7 @@ async function auditDom() {
       }
 
       const centerNames = [...document.querySelectorAll('.center-name')];
-      if (centerNames.length !== 3 || centerNames.some(node => node.textContent.trim() !== '东北大学融媒体中心')) issues.push('institution name is not updated consistently across all three designs');
+if (centerNames.length !== 3 || centerNames.some(node => node.textContent.trim() !== '东北大学融媒体中心')) issues.push('institution name is not updated consistently across all three designs');
       const frontHeadlineSize = parseFloat(getComputedStyle(document.querySelector('#a4-front .headline')).fontSize);
       if (frontHeadlineSize < 200) issues.push(`A4 front headline is not enlarged enough: ${frontHeadlineSize}px`);
 
@@ -192,7 +273,7 @@ async function auditDom() {
       return { issues, titleCount, hostSources };
     }, { nanhuGroup: CONFIG.groups.nanhu, hunnanGroup: CONFIG.groups.hunnan });
     assert(result.issues.length === 0, `DOM audit failed:\n${result.issues.join('\n')}`);
-    assert(result.titleCount >= 2, `Expected title on A4 and roll-up, found ${result.titleCount}`);
+    assert(result.titleCount >= 3, `Expected title on A4, roll-up and round fan, found ${result.titleCount}`);
     return result;
   } finally {
     await browser.close();
@@ -203,7 +284,7 @@ async function main() {
   assert(fs.existsSync(HTML), `Missing HTML: ${HTML}`);
   const html = fs.readFileSync(HTML, 'utf8');
   const required = [
-    '东北大学融媒体中心', '电视台', '招新啦', '把爱留在电视台',
+  '东北大学融媒体中心', '电视台', '招新啦', '把爱留在电视台',
     '面向全体在校生', '南湖校区', '浑南校区',
     CONFIG.groups.nanhu, CONFIG.groups.hunnan,
     '视频部', '主持部', '剪辑部',
@@ -243,6 +324,20 @@ async function main() {
       height: Math.round(CONFIG.output.rollupHeightMm / 25.4 * CONFIG.output.rollupDpi),
       density: CONFIG.output.rollupDpi,
     }],
+    [`output/png/${outputName('round-fan-front.png')}`, {
+      width: CONFIG.output.fanSizePx,
+      height: CONFIG.output.fanSizePx,
+      density: CONFIG.output.fanDpi,
+      alpha: true,
+      circularAlpha: true,
+    }],
+    [`output/png/${outputName('round-fan-back.png')}`, {
+      width: CONFIG.output.fanSizePx,
+      height: CONFIG.output.fanSizePx,
+      density: CONFIG.output.fanDpi,
+      alpha: true,
+      circularAlpha: true,
+    }],
   ];
   const reports = [];
   for (const [relativePath, expected] of rasterChecks) reports.push(await checkRaster(relativePath, expected));
@@ -259,7 +354,7 @@ async function main() {
   }
 
   console.log(reports.join('\n'));
-  console.log(`DOM: ${dom.titleCount} title occurrences, ${dom.hostSources.length} host-region assets, 4 QR placements`);
+  console.log(`DOM: ${dom.titleCount} title occurrences, ${dom.hostSources.length} host-region assets, 5 QR placements`);
   console.log('QA PASS');
 }
 

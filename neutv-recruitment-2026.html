@@ -769,6 +769,300 @@
     #rollup .roll-footer .audience-main span { color:var(--orange); margin-right:10px; }
     #rollup .roll-footer .slogan-small { font-family:var(--serif); font-size:26px; letter-spacing:.10em; color:rgba(8,36,94,.72); }
 
+    /* Double-sided round fan artwork */
+    .fan-export {
+      width: 1200px;
+      height: 1200px;
+      position: relative;
+      isolation: isolate;
+      background: transparent;
+    }
+    .fan-disc {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 20% 14%, rgba(255,255,255,.98) 0 12%, rgba(236,250,255,.92) 28%, transparent 51%),
+        radial-gradient(circle at 82% 79%, rgba(57,200,255,.29), transparent 34%),
+        linear-gradient(145deg, #fbfeff 0%, #e8f8ff 42%, #dcefff 73%, #f8fcff 100%);
+      box-shadow:
+        inset -34px -46px 86px rgba(10,78,189,.11),
+        inset 28px 30px 62px rgba(255,255,255,.78);
+    }
+    .fan-disc::before {
+      content: "";
+      position: absolute;
+      inset: -36px;
+      z-index: -4;
+      background: url("./assets/generated/glass-background.png") center / cover no-repeat;
+      opacity: .56;
+      mix-blend-mode: multiply;
+      filter: saturate(1.10) brightness(1.15) contrast(.91);
+      transform: rotate(-5deg) scale(1.06);
+    }
+    .fan-disc::after {
+      display: none;
+    }
+    .fan-ribbon {
+      position: absolute;
+      z-index: -1;
+      width: 1160px;
+      height: auto;
+      object-fit: contain;
+      opacity: .62;
+      filter: saturate(1.15) brightness(1.08) drop-shadow(0 24px 35px rgba(7,72,180,.12));
+      pointer-events: none;
+    }
+    .fan-front .fan-ribbon { left: 54px; top: 250px; transform: rotate(-17deg); }
+    .fan-back .fan-ribbon { right: -132px; top: 150px; transform: rotate(150deg) scale(.90); opacity: .48; }
+    .fan-orbit {
+      position: absolute;
+      z-index: -2;
+      border-radius: 50%;
+      border: 0;
+      background:
+        radial-gradient(circle at 30% 27%, rgba(255,255,255,.90), rgba(87,210,255,.13) 42%, rgba(7,88,255,.08) 70%, rgba(255,255,255,.18));
+      box-shadow:
+        inset 16px 18px 30px rgba(255,255,255,.50),
+        inset -18px -22px 38px rgba(7,88,255,.12),
+        0 24px 48px rgba(7,62,160,.10);
+      backdrop-filter: blur(8px) saturate(1.2);
+    }
+    .fan-orbit.one { width: 410px; height: 410px; right: -84px; top: 84px; }
+    .fan-orbit.two { width: 250px; height: 250px; left: 20px; bottom: 90px; }
+    .fan-back .fan-orbit.one { width: 330px; height: 330px; right: 28px; top: 54px; }
+    .fan-back .fan-orbit.two { width: 360px; height: 360px; left: -92px; bottom: 50px; }
+    .fan-spark {
+      position: absolute;
+      z-index: 6;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--orange);
+      box-shadow: 0 0 0 8px rgba(255,138,50,.11), 0 0 25px rgba(255,138,50,.40);
+    }
+    .fan-spark.a { left: 212px; top: 174px; }
+    .fan-spark.b { right: 172px; bottom: 220px; width: 9px; height: 9px; }
+    .fan-handle-zone {
+      position: absolute;
+      left: 50%;
+      bottom: -78px;
+      z-index: 1;
+      width: 410px;
+      height: 470px;
+      transform: translateX(-50%);
+      border-radius: 52% 52% 0 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at 50% 92%, rgba(255,255,255,.94), rgba(234,249,255,.72) 42%, rgba(121,205,255,.18) 67%, transparent 76%);
+      filter: blur(4px);
+      opacity: .86;
+      mix-blend-mode: screen;
+    }
+    .fan-handle-zone::before,
+    .fan-handle-zone::after {
+      content: "";
+      position: absolute;
+      top: 70px;
+      width: 180px;
+      height: 300px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.38);
+      opacity: .42;
+    }
+    .fan-handle-zone::before { left: -118px; transform: rotate(-15deg); }
+    .fan-handle-zone::after { right: -118px; transform: rotate(15deg); }
+    .fan-year-chip {
+      position: absolute;
+      left: 50%;
+      top: 92px;
+      z-index: 7;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      height: auto;
+      padding: 0;
+      color: var(--blue-deep);
+      font-size: 20px;
+      font-weight: 810;
+      letter-spacing: .15em;
+      white-space: nowrap;
+      background: none;
+      border: 0;
+      box-shadow: none;
+      backdrop-filter: none;
+    }
+    .fan-year-chip i {
+      width: 35px;
+      height: 2px;
+      display: block;
+      background: linear-gradient(90deg, var(--orange), rgba(255,138,50,.18));
+    }
+    .fan-brand-card {
+      position: absolute;
+      left: 300px;
+      right: 300px;
+      top: 190px;
+      z-index: 8;
+      height: 142px;
+      border-radius: 0;
+      display: grid;
+      place-items: center;
+      background: none;
+      border: 0;
+      box-shadow: none;
+      backdrop-filter: none;
+    }
+    .fan-brand-card::before {
+      display: none;
+    }
+    .fan-brand-card .fan-logo {
+      width: 500px;
+      height: 136px;
+      object-fit: contain;
+      transform: none;
+      filter: drop-shadow(0 8px 12px rgba(7,52,145,.08));
+    }
+    .fan-identity {
+      position: absolute;
+      left: 130px;
+      right: 130px;
+      top: 362px;
+      z-index: 8;
+      text-align: center;
+    }
+    .fan-identity strong {
+      display: block;
+      font-size: 27px;
+      font-weight: 720;
+      letter-spacing: .16em;
+      color: rgba(8,36,94,.82);
+    }
+    .fan-identity span {
+      display: block;
+      margin-top: 8px;
+      font-size: 16px;
+      font-weight: 720;
+      letter-spacing: .20em;
+      color: rgba(8,36,94,.48);
+    }
+    .fan-main-title {
+      position: absolute;
+      left: 136px;
+      right: 136px;
+      top: 490px;
+      z-index: 8;
+      text-align: center;
+      font-family: var(--display);
+      font-size: 112px;
+      line-height: 1;
+      letter-spacing: .075em;
+      color: var(--blue-deep);
+      text-shadow: 0 5px 0 rgba(255,255,255,.76), 0 14px 26px rgba(8,62,170,.11);
+    }
+    .fan-main-title span { display: inline; }
+    .fan-main-title .accent {
+      margin-top: 0;
+      margin-left: .24em;
+      background: none;
+      color: #0874e8;
+      -webkit-text-fill-color: #0874e8;
+      text-shadow: 0 5px 0 rgba(255,255,255,.76), 0 14px 26px rgba(8,92,190,.13);
+    }
+    .fan-slogan {
+      position: absolute;
+      left: 140px;
+      right: 140px;
+      top: 666px;
+      z-index: 8;
+      text-align: center;
+      font-family: var(--serif);
+      font-size: 44px;
+      font-weight: 520;
+      letter-spacing: .17em;
+      color: var(--ink);
+    }
+    .fan-back-brand {
+      position: absolute;
+      left: 420px;
+      right: 410px;
+      top: 72px;
+      z-index: 8;
+      height: 96px;
+      display: grid;
+      place-items: center;
+      border-radius: 0;
+      background: none;
+      border: 0;
+      box-shadow: none;
+      backdrop-filter: none;
+    }
+    .fan-back-brand .fan-logo { width: 360px; height: 92px; object-fit: contain; }
+    .fan-back-heading {
+      position: absolute;
+      left: 140px;
+      right: 140px;
+      top: 202px;
+      z-index: 8;
+      text-align: center;
+    }
+    .fan-back-heading h2 {
+      display: inline-block;
+      font-family: var(--display);
+      font-size: 58px;
+      line-height: 1;
+      color: var(--blue-deep);
+      letter-spacing: -.02em;
+    }
+    .fan-back-heading p {
+      display: block;
+      width: max-content;
+      margin: 10px auto 0;
+      font-size: 14px;
+      font-weight: 760;
+      letter-spacing: .24em;
+      color: rgba(8,36,94,.48);
+    }
+    .fan-qr-box.qr-box {
+      position: absolute;
+      left: 410px;
+      top: 405px;
+      z-index: 8;
+      width: 360px;
+      height: 360px;
+      border-radius: 0;
+      padding: 0;
+      background: #ffffff;
+      border: 0;
+      box-shadow: none;
+    }
+    .fan-qr-box .qr-image { border-radius: 0; }
+    .fan-group-number {
+      position: absolute;
+      left: 170px;
+      right: 170px;
+      top: 304px;
+      z-index: 8;
+      text-align: center;
+    }
+    .fan-group-number span {
+      display: block;
+      font-size: 16px;
+      font-weight: 720;
+      letter-spacing: .18em;
+      color: rgba(8,36,94,.54);
+    }
+    .fan-group-number strong {
+      display: block;
+      margin-top: 4px;
+      font-size: 41px;
+      line-height: 1.1;
+      font-weight: 850;
+      letter-spacing: .08em;
+      color: var(--blue-deep);
+    }
     @media print {
       html, body { background: white; }
       .design-stage { padding: 0; gap: 0; }
@@ -807,7 +1101,7 @@
 
         <section class="who glass">
           <p class="label">WHO WE ARE / 我们是谁</p>
-          <p>我们是东北大学融媒体中心电视台，用视频、主持与剪辑<span class="nobr">记录校园</span>。加入后，你可以参与<span class="nobr">官方短视频账号创作</span>、主持采访，或完成<span class="nobr">校园新闻后期制作</span>。</p>
+            <p>我们是东北大学融媒体中心电视台，用视频、主持与剪辑<span class="nobr">记录校园</span>。加入后，你可以参与<span class="nobr">官方短视频账号创作</span>、主持采访，或完成<span class="nobr">校园新闻后期制作</span>。</p>
           <div class="front-directions">
             <span><i></i>短视频创作</span>
             <span><i></i>主持采访</span>
@@ -986,6 +1280,49 @@
           <p class="audience-main"><span>✦</span>面向全体在校生｜不限年级｜不限专业｜不限基础</p>
           <p class="slogan-small">把爱留在电视台</p>
         </footer>
+      </div>
+    </section>
+
+    <section class="fan-export" id="fan-front" aria-label="圆形招新扇正面">
+      <div class="fan-disc fan-front">
+        <img class="fan-ribbon" src="./assets/generated/glass-ribbon.png" alt="">
+        <div class="fan-orbit one"></div>
+        <div class="fan-orbit two"></div>
+        <div class="fan-handle-zone" aria-hidden="true"></div>
+        <i class="fan-spark a"></i>
+        <i class="fan-spark b"></i>
+        <p class="fan-year-chip"><span>2026</span><i></i><span>NEW MEMBER CALL</span></p>
+        <div class="fan-brand-card">
+          <img class="fan-logo" src="./assets/brand/neutv-logo-transparent.png" alt="东北大学电视台 NEUTV">
+        </div>
+        <p class="fan-identity">
+          <strong>东北大学融媒体中心</strong>
+          <span>东北大学电视台 NEUTV</span>
+        </p>
+        <h1 class="fan-main-title"><span>电视台</span><span class="accent">招新啦</span></h1>
+        <p class="fan-slogan">把爱留在电视台</p>
+      </div>
+    </section>
+
+    <section class="fan-export" id="fan-back" aria-label="圆形招新扇反面">
+      <div class="fan-disc fan-back">
+        <img class="fan-ribbon" src="./assets/generated/glass-ribbon.png" alt="">
+        <div class="fan-orbit one"></div>
+        <div class="fan-orbit two"></div>
+        <div class="fan-handle-zone" aria-hidden="true"></div>
+        <i class="fan-spark a"></i>
+        <i class="fan-spark b"></i>
+        <div class="fan-back-brand">
+          <img class="fan-logo" src="./assets/brand/neutv-logo-transparent.png" alt="东北大学电视台 NEUTV">
+        </div>
+        <div class="fan-back-heading">
+          <h2>南湖校区招新群</h2>
+          <p>NANHU CAMPUS · NEW MEMBER CALL</p>
+        </div>
+        <div class="fan-qr-box qr-box">
+          <img class="qr-image" src="./assets/qr/nanhu-qq.png" alt="南湖校区招新QQ群二维码">
+        </div>
+        <p class="fan-group-number"><span>QQ群号</span><strong>1105594928</strong></p>
       </div>
     </section>
   </main>

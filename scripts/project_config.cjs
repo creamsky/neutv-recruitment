@@ -18,6 +18,12 @@ function readConfig() {
       throw new Error(`Invalid ${campus} group number in project.config.json`);
     }
   }
+  if (!Number.isInteger(config.output?.fanSizePx) || config.output.fanSizePx < 1200) {
+    throw new Error(`Invalid output.fanSizePx in project.config.json: ${config.output?.fanSizePx}`);
+  }
+  if (!Number.isInteger(config.output?.fanDpi) || config.output.fanDpi < 72) {
+    throw new Error(`Invalid output.fanDpi in project.config.json: ${config.output?.fanDpi}`);
+  }
   return config;
 }
 

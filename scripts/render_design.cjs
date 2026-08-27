@@ -94,6 +94,13 @@ async function renderElement(browser, baseUrl, spec) {
     if (broken.length) throw new Error(`Broken images: ${broken.map(image => image.src).join(', ')}`);
   });
 
+  if (spec.transparent) {
+    await page.evaluate(() => {
+      document.documentElement.style.background = 'transparent';
+      document.body.style.background = 'transparent';
+    });
+  }
+
   const locator = page.locator(spec.selector);
   await locator.waitFor({ state: 'visible' });
   const rawPath = path.join(TMP_RENDER, `${spec.name}-raw.png`);
@@ -101,12 +108,27 @@ async function renderElement(browser, baseUrl, spec) {
   if (spec.tiled) {
     await captureTiledElement(page, spec, capturePath);
   } else {
-    await locator.screenshot({ path: rawPath, type: 'png', animations: 'disabled', scale: 'device' });
+    await locator.screenshot({
+      path: rawPath,
+      type: 'png',
+      animations: 'disabled',
+      scale: 'device',
+      omitBackground: Boolean(spec.transparent),
+    });
   }
   if (!spec.directTiledOutput) {
-    await sharp(rawPath)
-      .resize(spec.width, spec.height, { fit: 'fill', kernel: sharp.kernel.lanczos3 })
-      .flatten({ background: '#ffffff' })
+    let output = sharp(rawPath)
+      .resize(spec.width, spec.height, { fit: 'fill', kernel: sharp.kernel.lanczos3 });
+    if (!spec.transparent) output = output.flatten({ background: '#ffffff' });
+    if (spec.circularMask) {
+      const mask = Buffer.from(
+        `<svg width="${spec.width}" height="${spec.height}" xmlns="http://www.w3.org/2000/svg">`
+          + `<circle cx="${spec.width / 2}" cy="${spec.height / 2}" r="${Math.min(spec.width, spec.height) / 2}" fill="white"/>`
+          + '</svg>',
+      );
+      output = output.composite([{ input: mask, blend: 'dest-in' }]);
+    }
+    await output
       .withMetadata({ density: spec.density })
       .png({ compressionLevel: 9, adaptiveFiltering: true, palette: false })
       .toFile(spec.output);
@@ -132,7 +154,7 @@ async function captureTiledElement(page, spec, rawPath) {
   await page.evaluate(({ selector, cssWidth, cssHeight }) => {
     const target = document.querySelector(selector);
     if (!target) throw new Error(`Missing tiled target: ${selector}`);
-    document.querySelectorAll('.sheet').forEach(sheet => {
+    document.querySelectorAll('.sheet, .fan-export').forEach(sheet => {
       if (sheet !== target) sheet.style.display = 'none';
     });
     const stage = document.querySelector('.design-stage');
@@ -240,7 +262,7 @@ async function captureRollupHiresStrips(browser, baseUrl) {
 
       const target = document.querySelector(selector);
       if (!target) throw new Error(`Missing 600 dpi roll-up target: ${selector}`);
-      document.querySelectorAll('.sheet').forEach(sheet => {
+      document.querySelectorAll('.sheet, .fan-export').forEach(sheet => {
         if (sheet !== target) sheet.style.display = 'none';
       });
       const stage = document.querySelector('.design-stage');
@@ -344,6 +366,29 @@ async function makeA4Preview(frontPath, backPath) {
   console.log(`A4 preview -> ${previewPath}`);
 }
 
+async function makeFanPreview(frontPath, backPath) {
+  const itemSize = 920;
+  const margin = 76;
+  const gap = 64;
+  const canvasWidth = margin * 2 + itemSize * 2 + gap;
+  const canvasHeight = itemSize + margin * 2;
+  const [front, back] = await Promise.all([
+    sharp(frontPath).resize(itemSize, itemSize).png().toBuffer(),
+    sharp(backPath).resize(itemSize, itemSize).png().toBuffer(),
+  ]);
+  const previewPath = path.join(OUTPUT_PREVIEW, 'round-fan-double-sided-preview.png');
+  await sharp({
+    create: { width: canvasWidth, height: canvasHeight, channels: 3, background: '#dfe9f4' },
+  })
+    .composite([
+      { input: front, left: margin, top: margin },
+      { input: back, left: margin + itemSize + gap, top: margin },
+    ])
+    .png({ compressionLevel: 9 })
+    .toFile(previewPath);
+  console.log(`Round fan preview -> ${previewPath}`);
+}
+
 async function makeReviewPreviews(specs) {
   for (const spec of specs) {
     const previewPath = path.join(OUTPUT_PREVIEW, `${spec.name}-review.png`);
@@ -364,7 +409,7 @@ async function addPngPage(pdf, pngPath, widthPt, heightPt) {
 async function writePdfs(frontPath, backPath, rollupPath) {
   const a4 = await PDFDocument.create();
   a4.setTitle(`东北大学电视台 ${YEAR} 招新宣传单`);
-  a4.setAuthor('东北大学融媒体中心 · 东北大学电视台');
+    a4.setAuthor('东北大学融媒体中心 · 东北大学电视台');
   a4.setSubject('A4 双面招新宣传单');
   await addPngPage(a4, frontPath, 595.2755906, 841.8897638);
   await addPngPage(a4, backPath, 595.2755906, 841.8897638);
@@ -373,7 +418,7 @@ async function writePdfs(frontPath, backPath, rollupPath) {
 
   const rollup = await PDFDocument.create();
   rollup.setTitle(`东北大学电视台 ${YEAR} 招新易拉宝`);
-  rollup.setAuthor('东北大学融媒体中心 · 东北大学电视台');
+    rollup.setAuthor('东北大学融媒体中心 · 东北大学电视台');
   rollup.setSubject('80 × 200 cm 招新易拉宝');
   await addPngPage(rollup, rollupPath, 2267.7165354, 5669.2913386);
   const rollupPdfPath = path.join(OUTPUT_PDF, outputName('rollup-80x200cm.pdf'));
@@ -403,6 +448,10 @@ async function main() {
   const frontPath = path.join(OUTPUT_PNG, outputName('A4-front.png'));
   const backPath = path.join(OUTPUT_PNG, outputName('A4-back.png'));
   const rollupPath = path.join(OUTPUT_PNG, outputName(`rollup-80x200cm-${rollupDpi}dpi.png`));
+  const fanFrontPath = path.join(OUTPUT_PNG, outputName('round-fan-front.png'));
+  const fanBackPath = path.join(OUTPUT_PNG, outputName('round-fan-back.png'));
+  const fanSize = CONFIG.output.fanSizePx;
+  const fanDpi = CONFIG.output.fanDpi;
   const specs = [
     {
       name: 'A4-front', selector: '#a4-front', output: frontPath,
@@ -419,6 +468,16 @@ async function main() {
       viewport: { width: 1200, height: 500 }, dpr: rollupHeight / 3000,
       tiled: true, cssWidth: 1200, cssHeight: 3000, tileHeight: 500, tileOverlap: 24,
       width: rollupWidth, height: rollupHeight, density: rollupDpi,
+    },
+    {
+      name: 'round-fan-front', selector: '#fan-front', output: fanFrontPath,
+      viewport: { width: 1320, height: 1320 }, dpr: fanSize / 1200,
+      width: fanSize, height: fanSize, density: fanDpi, transparent: true, circularMask: true,
+    },
+    {
+      name: 'round-fan-back', selector: '#fan-back', output: fanBackPath,
+      viewport: { width: 1320, height: 1320 }, dpr: fanSize / 1200,
+      width: fanSize, height: fanSize, density: fanDpi, transparent: true, circularMask: true,
     },
   ];
   const selectedSpecs = rollupOnly ? specs.filter(spec => spec.selector === '#rollup') : specs;
@@ -452,6 +511,7 @@ async function main() {
 
   if (!rollupOnly) {
     await makeA4Preview(frontPath, backPath);
+    await makeFanPreview(fanFrontPath, fanBackPath);
     await makeReviewPreviews(specs);
   }
 
